@@ -1,10 +1,10 @@
 
--- ganre definition
+-- genre definition
 
-CREATE TABLE ganre (
-	ganre_id serial4 NOT NULL,
-	ganre_name varchar(20) NOT NULL,
-	CONSTRAINT ganre_pk PRIMARY KEY (ganre_id)
+CREATE TABLE genre (
+	genre_id serial4 NOT NULL,
+	genre_name varchar(20) NOT NULL,
+	CONSTRAINT genre_pk PRIMARY KEY (genre_id)
 );
 
 -- singer definition
@@ -15,18 +15,18 @@ CREATE TABLE singer (
 	CONSTRAINT singer_pk PRIMARY KEY (singer_id)
 );
 
--- ganre_singer definition
+-- genre_singer definition
 
-CREATE TABLE ganre_singer (
-	ganre_id int4 NOT NULL,
+CREATE TABLE genre_singer (
+	genre_id int4 NOT NULL,
 	singer_id int4 NOT NULL,
-	CONSTRAINT gs_pk PRIMARY KEY (ganre_id, singer_id)
+	CONSTRAINT gs_pk PRIMARY KEY (genre_id, singer_id)
 );
 
--- ganre_singer foreign keys
+-- genre_singer foreign keys
 
-ALTER TABLE ganre_singer ADD CONSTRAINT gs_ganre_id_fk FOREIGN KEY (ganre_id) REFERENCES ganre(ganre_id);
-ALTER TABLE ganre_singer ADD CONSTRAINT gs_singer_id_fk FOREIGN KEY (singer_id) REFERENCES singer(singer_id);
+ALTER TABLE genre_singer ADD CONSTRAINT gs_genre_id_fk FOREIGN KEY (genre_id) REFERENCES genre(genre_id);
+ALTER TABLE genre_singer ADD CONSTRAINT gs_singer_id_fk FOREIGN KEY (singer_id) REFERENCES singer(singer_id);
 
 -- album definition
 
