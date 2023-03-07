@@ -36,19 +36,19 @@ INSERT INTO singer_album (singer_id, album_id) VALUES
 	(7, 16), (8, 17), (2, 18), (2, 19), (2, 20), (2, 21), (9, 22);
 
 INSERT INTO track (track_id, album_id, title, playing_time) VALUES
-	(1, 1, 'I Saw Her Standing There', '00:02:52'),
-	(2, 1, 'Misery	', '00:01:47'), (3, 1, 'Anna (Go to Him)', '00:02:54'),
-	(4, 2, 'Chains', '00:02:23'), (5, 3, 'Boys', '00:02:24'),
-	(6, 4, 'Ask me why', '00:02:24'), (7, 5, 'Please please me', '00:02:00'),
-	(8, 6, 'Love me do', '00:02:19'), (9, 7, 'P.S. I love you', '00:02:02'),
-	(10, 8, 'Baby it''s you', '00:02:35'), (11, 9, 'Do you want to know my secret', '00:01:56'),
-	(12, 10, 'A taste of honey', '00:02:01'), (13, 11, 'There''s a place', '00:01:49'),
-	(14, 12, 'Twist and Shout', '00:02:33'), (15, 13, 'Grendel', '00:17:15'),
-	(16, 14, 'Charting the single', '00:04:48'), (17, 15, 'Market Square Herous', '00:03:56'),
-	(18, 16, 'Three boats down from the candy', '00:04:01'), (19, 17, 'Cinderella search', '00:04:21'),
-	(20, 18, 'Lady Nina', '00:03:43'), (21, 19, 'Freaks', '00:04:02'),
-	(22, 20, 'Tux on', '00:05:12'), (23, 21, 'Margaret', '00:12:17'),
-	(24, 22, 'Secret land', '00:04:45'), (25, 22, 'Heaven can wait', '00:04:04');
+	(1, 1, 'I Saw Her Standing There', 172),
+	(2, 1, 'Misery	', 107), (3, 1, 'Anna (Go to Him)', 174),
+	(4, 2, 'Chains', 143), (5, 3, 'Boys', 144),
+	(6, 4, 'Ask me why', 144), (7, 5, 'Please please me', 120),
+	(8, 6, 'Love me do', 139), (9, 7, 'P.S. I love you', 122),
+	(10, 8, 'Baby it''s you', 155), (11, 9, 'Do you want to know my secret', 116),
+	(12, 10, 'A taste of honey', 121), (13, 11, 'There''s a place', 109),
+	(14, 12, 'Twist and Shout', 153), (15, 13, 'Grendel', 1035),
+	(16, 14, 'Charting the single', 288), (17, 15, 'Market Square Herous', 236),
+	(18, 16, 'Three boats down from the candy', 241), (19, 17, 'Cinderella search', 281),
+	(20, 18, 'Lady Nina', 223), (21, 19, 'Freaks', 242),
+	(22, 20, 'Tux on', 312), (23, 21, 'Margaret', 737),
+	(24, 22, 'Secret land', 285), (25, 22, 'Heaven can wait', 244);
 
 INSERT INTO collection (collection_id, title, release_year) VALUES
 	(1, 'Greatest hits 2000', 2000), (2, 'Greatest hits 2001', 2001),
