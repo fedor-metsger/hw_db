@@ -18,7 +18,7 @@
   SELECT name
     FROM singer
    WHERE (LENGTH(name) - LENGTH(REPLACE(name, ' ', ''))) = 0;
-
+  
   SELECT title
     FROM track
-   WHERE title LIKE '%my%';
+   WHERE title LIKE '%my%' OR title LIKE '%мой%';
