@@ -23,7 +23,7 @@ INSERT INTO album (album_id, title, release_year) VALUES
 	(5, 'RUBBER SOUL', 1965), (6, 'REVOLVER', 1966),
 	(7, 'WHITE ALBUM', 1968), (8, 'YELLOW SUBMARINE', 1969),
 	(9, 'ABBEY ROAD', 1969), (10, 'LET IT BE', 1970),
-	(11, 'MAGICAL MYSTERY TOUR', 1967), (12, 'SOME GREAT REWARD', 1984),
+	(11, 'MAGICAL MYSTERY TOUR', 1967), (12, 'SOME GREAT REWARD', 2020),
 	(13, 'IMAGINE      /SOUNDTRACK/', 1988), (14, 'WHOS THAT GIRL', 2018),
 	(15, 'TRIAL BY FIRE-LIVE IN LEN', 1988), (16, 'B-SIDES THEMSELVES', 2018),
 	(17, 'RAM IT DOWN /REMASTER+BON', 1986), (18, 'PIPER AT GATES OF DAWN', 1967),
@@ -43,7 +43,7 @@ INSERT INTO track (track_id, album_id, title, playing_time) VALUES
 	(8, 6, 'Love me do', 139), (9, 7, 'P.S. I love you', 122),
 	(10, 8, 'Baby it''s you', 155), (11, 9, 'Do you want to know my secret', 116),
 	(12, 10, 'A taste of honey', 121), (13, 11, 'There''s a place', 109),
-	(14, 12, 'Twist and Shout', 153), (15, 13, 'Grendel', 1035),
+	(14, 12, 'Twist and Shout', 107), (15, 13, 'Grendel', 1035),
 	(16, 14, 'Charting the single', 288), (17, 15, 'Market Square Herous', 236),
 	(18, 16, 'Three boats down from the candy', 241), (19, 17, 'Cinderella search', 281),
 	(20, 18, 'Lady Nina', 223), (21, 19, 'Freaks', 242),
@@ -59,5 +59,5 @@ INSERT INTO collection (collection_id, title, release_year) VALUES
 INSERT INTO collection_track (collection_id, track_id) VALUES
 	(1, 1), (1, 2), (1, 3), (1, 4), (2, 5), (2, 6),
 	(2, 7), (2, 8), (3, 9), (3, 10), (3, 11), (3, 12), (3, 13), (4, 14),
-	(4, 15), (4, 16), (4, 17), (4, 18), (4, 19), (4, 20), (5, 21), (5, 22),
-	(5, 23), (5, 24), (5, 25), (3, 15), (2, 16), (4, 21), (5, 18), (2, 19);
+	(4, 15), (4, 16), (4, 17), (4, 18), (4, 19), (5, 21), (5, 22),
+	(5, 24), (5, 25), (3, 15), (2, 16), (4, 21), (5, 18), (2, 19);

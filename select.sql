@@ -3,7 +3,7 @@
     FROM album
    WHERE release_year = 2018;
 
-  SELECT title, TO_CHAR(playing_time / 60, '99') || ':' || TO_CHAR(playing_time % 60, '99') AS playing_time
+  SELECT title, TO_CHAR(playing_time / 60, '99') || ':' || TO_CHAR(playing_time % 60, '00') AS playing_time
     FROM track
    WHERE playing_time = (SELECT MAX(playing_time) FROM track);
    		  
