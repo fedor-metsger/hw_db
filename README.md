@@ -16,3 +16,7 @@
 ## Ответы к ДЗ по теме «Продвинутая выборка данных»
 
 Ответы в файле [select2.sql](https://github.com/fedor-metsger/hw_db/blob/main/select2.sql)
+
+## Ответы к ДЗ по теме «Работа с PostgreSQL из Python»
+
+Решение в файлу [main.py](https://github.com/fedor-metsger/hw_db/main.py)
