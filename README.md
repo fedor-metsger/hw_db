@@ -19,4 +19,4 @@
 
 ## Ответы к ДЗ по теме «Работа с PostgreSQL из Python»
 
-Решение в файлу [main.py](https://github.com/fedor-metsger/hw_db/main.py)
+Решение в файлу [main.py](https://github.com/fedor-metsger/hw_db/blob/main/main.py)
