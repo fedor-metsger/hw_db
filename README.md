@@ -19,4 +19,8 @@
 
 ## Ответы к ДЗ по теме «Работа с PostgreSQL из Python»
 
-Решение в файлу [main.py](https://github.com/fedor-metsger/hw_db/blob/main/main.py)
+Решение в файлу [main.py](https://github.com/fedor-metsger/hw_db/blob/main/main.py)  
+В корневой папке должен лежать файл **"db_connection.txt"** с одной строкой вида:
+```
+db_name user_name user_password
+```
