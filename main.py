@@ -13,7 +13,7 @@ def read_connection_data():
         print(f"Ошибка при чтении файла с параметрами БД: {DB_CONNECTION_FILENAME}")
     return db_name, user_name, user_password
 
-#                 email VARCHAR(40) NOT NULL CHECK (email ~ '^[0-9a-z\._]+@[0-9a-z\._]+$'),
+
 def create_db(conn):
     with conn.cursor() as cur:
         cur.execute("""
@@ -48,6 +48,7 @@ def add_client(conn, first_name, last_name, email, phones=None):
 #    conn.commit()
     return client_id
 
+
 def add_phone(conn, client_id, phone):
     with conn.cursor() as cur:
         if phone and client_id:
@@ -61,17 +62,20 @@ def change_last_name(conn, client_id, last_name):
             UPDATE client SET lastname = %s WHERE client_id = %s
         """, (last_name, client_id))
 
+
 def change_first_name(conn, client_id, first_name):
     with conn.cursor() as cur:
         cur.execute("""
             UPDATE client SET client_name = %s WHERE client_id = %s
         """, (first_name, client_id))
 
+
 def change_email(conn, client_id, email):
     with conn.cursor() as cur:
         cur.execute("""
             UPDATE client SET email = %s WHERE client_id = %s
         """, (email, client_id))
+
 
 def change_phones(conn, client_id, phones):
     with conn.cursor() as cur:
@@ -86,6 +90,7 @@ def change_phones(conn, client_id, phones):
             # """, (client_id, num))
             add_phone(conn, client_id, num)
 
+
 def change_client(conn, client_id, first_name=None, last_name=None, email=None, phones=None):
     if not client_id:
         return
@@ -98,12 +103,14 @@ def change_client(conn, client_id, first_name=None, last_name=None, email=None, 
     if phones:
         change_phones(conn, client_id, phones)
 
+
 def delete_phone(conn, client_id, phone):
     with conn.cursor() as cur:
         if phone and client_id:
             cur.execute("""
                 DELETE FROM phone WHERE client_id = %s AND phone_number = %s
             """, (client_id, phone))
+
 
 def delete_client(conn, client_id):
     with conn.cursor() as cur:
@@ -115,6 +122,7 @@ def delete_client(conn, client_id):
             cur.execute("""
                 DELETE FROM client WHERE client_id = %s
             """, (client_id,))
+
 
 def find_client(conn, first_name=None, last_name=None, email=None, phone=None):
     sql_text = "SELECT client_id FROM client"
@@ -171,6 +179,7 @@ def find_client(conn, first_name=None, last_name=None, email=None, phone=None):
                 ret.append(result[0])
             else: break
     return ret
+
 
 def main():
     db_name, user_name, user_password = read_connection_data()
