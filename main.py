@@ -3,6 +3,7 @@ import psycopg2
 
 DB_CONNECTION_FILENAME = "db_connection.txt"
 
+
 def read_connection_data():
     db_name = user_name = user_password = None
     try:
@@ -103,6 +104,7 @@ def delete_phone(conn, client_id, phone):
             cur.execute("""
                 DELETE FROM phone WHERE client_id = %s AND phone_number = %s
             """, (client_id, phone))
+
 def delete_client(conn, client_id):
     with conn.cursor() as cur:
         if client_id:
@@ -115,8 +117,60 @@ def delete_client(conn, client_id):
             """, (client_id,))
 
 def find_client(conn, first_name=None, last_name=None, email=None, phone=None):
-    pass
+    sql_text = "SELECT client_id FROM client"
+    first_cond = True
+    sql_params = []
+    if first_name:
+        sql_text += """
+                WHERE client_name = %s"""
+        sql_params.append(first_name)
+        first_cond = False
+    if last_name:
+        if first_cond:
+            sql_text += """
+                WHERE lastname = %s"""
+        else:
+            sql_text += """
+                AND lastname = %s"""
+        sql_params.append(last_name)
+        first_cond = False
+    if email:
+        if first_cond:
+            sql_text += """
+                WHERE email = %s"""
+        else:
+            sql_text += """
+                AND email = %s"""
+        sql_params.append(email)
+        first_cond = False
+    if phone:
+        if first_cond:
+            sql_text += """
+                WHERE client_id IN (
+                    SELECT client_id
+                    FROM phone
+                    WHERE phone_number = %s
+                )"""
+        else:
+            sql_text += """
+                AND client_id IN (
+                    SELECT client_id
+                    FROM phone
+                    WHERE phone_number = %s
+                )"""
+        sql_params.append(phone)
+        first_cond = False
+    sql_text += ';'
 
+    ret = []
+    with conn.cursor() as cur:
+        cur.execute(sql_text, sql_params)
+        while True:
+            result = cur.fetchone()
+            if result:
+                ret.append(result[0])
+            else: break
+    return ret
 
 def main():
     db_name, user_name, user_password = read_connection_data()
@@ -150,11 +204,22 @@ def main():
         delete_client(conn, ivanov_id)
         conn.commit()
 
-        change_client(conn, petrov_id, first_name="Николай")
+        change_client(conn, stepanov_id, first_name="Николай")
+        change_client(conn, petrov_id, first_name="Николай", email="nikolay.petrov@email.com")
         change_client(conn, mironov_id, last_name="Николаев")
         change_client(conn, stepanov_id, email="updated@email.com")
         change_client(conn, petrov_id, phones = ["79572347889", "72345678901"])
         conn.commit()
+
+        print(find_client(conn, first_name="Николай"))
+        print(find_client(conn, last_name="Семенов"))
+        print(find_client(conn, email="miron.mironov@email.com"))
+        print(find_client(conn, phone="79572347889"))
+        print(find_client(conn, first_name="Николай", last_name="Петров"))
+        print(find_client(conn, first_name="Николай", last_name="Петров", email="miron.mironov@email.com"))
+        print(find_client(conn, first_name="Николай", last_name="Петров",
+            email="nikolay.petrov@email.com", phone="72345678901"))
+
     conn.close()
 
 if __name__ == "__main__":
