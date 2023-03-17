@@ -110,13 +110,13 @@ def fill_dicts():
     """
     try:
         with open(DATA_JSON_FILE, "r", encoding="utf-8") as f:
-            json_dict = json.load(f)
+            json_list = json.load(f)
     except:
         print(f"Ошибка при чтении файла с данными: {DATA_JSON_FILE}")
         return None, None, None, None, None
 
     pub_dict, books_dict, shops_dict, stocks_dict, sales_dict = [], [], [], [], []
-    for m in json_dict:
+    for m in json_list:
         if m["model"] == "publisher":
             pub_dict.append({"id": m["pk"], "name": m["fields"]["name"]})
         elif m["model"] == "book":
