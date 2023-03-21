@@ -1,6 +1,7 @@
 
 import os
 import json
+from datetime import date as date
 import sqlalchemy as sq
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 
@@ -157,6 +158,32 @@ def get_shops_by_pub(session, pub):
     for s in q.all(): result = result.union({s.Shop.name})
     return result
 
+def get_sales_by_pub(session, pub):
+    """
+    Возвращает список фактов покупок книг определённого издателя
+    :param pub: Имя издателя
+    :return: Список фактов покупок
+    """
+    q = session.query(
+        Publisher, Book, Stock, Shop, Sale
+    ).filter(
+        Publisher.id == Book.id_publisher
+    ).filter(
+        Book.id == Stock.id_book
+    ).filter(
+        Shop.id == Stock.id_shop
+    ).filter(
+        Sale.id_stock == Stock.id
+    ).filter(
+        Publisher.name == pub
+    )
+
+    result = []
+    for s in q.all(): result.append({"title": s.Book.title, "shop": s.Shop.name,
+                                     "price": s.Sale.price, "date": s.Sale.date_sale})
+    return result
+
+
 
 def main():
     DSN = get_dsn()
@@ -189,8 +216,29 @@ def main():
     session.add_all(list_to_add)
     session.commit()
 
-    for pub in pub_dict:
-        print(f'Издателя "{pub["name"]}" продают магазины: {get_shops_by_pub(session, pub["name"])}')
+    # for pub in pub_dict:
+    #     print(f'Издателя "{pub["name"]}" продают магазины: {get_shops_by_pub(session, pub["name"])}')
+
+    publ = input("Введите имя издателя (O’Reilly): ")
+    if publ == "": publ = "O’Reilly"
+    print(f'Факты покупки книг издателя "{publ}":')
+    res = get_sales_by_pub(session, publ)
+    if not res:
+        print("Ошибка при извлечении данных")
+        return
+    elif res == []:
+        print("Нет таких фактов продажи")
+        return
+
+    mt = max([14, len(max(res, key=lambda i: len(i['title']))["title"])])
+    ms = max([17, len(max(res, key=lambda i: len(i['title']))["shop"])])
+
+    print(f'{"название книги".ljust(mt)[0:mt]} | {"название магазина".ljust(ms)[0:ms]}' +
+          " | стоимость покупки | дата покупки\n" + f'{"-" * mt} | {"-" * ms} | ----------------- | ------------')
+    for i in res:
+        print(f'{i["title"].ljust(mt)[0:mt]} | {i["shop"].ljust(ms)[0:ms]}' +
+              " | {:17.2f}".format(i["price"]) + " |   " + i["date"].strftime("%d-%m-%Y"))
+
 
 if __name__ == "__main__":
     main()
